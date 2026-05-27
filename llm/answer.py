@@ -12,7 +12,7 @@ def _build_prompt(query: str, context_chunks: list[dict]) -> str:
 
     context_str = "\n\n---\n\n".join(context_parts)
 
-    prompt = f"""You are a helpful AI assistant for Highwatch AI. Answer the user's question based ONLY on the provided context documents below.
+    prompt = f"""You are a helpful AI assistant for NexusRAG. Answer the user's question based ONLY on the provided context documents below.
 
 Rules:
 - If the answer is clearly found in the documents, answer it concisely and accurately.
@@ -93,17 +93,22 @@ def generate_answer(query: str, context_chunks: list[dict]) -> dict:
             
     sources = []
     for name, doc_id in sources_dict.items():
-        if not doc_id or "/" in doc_id or "\\" in doc_id:
-            # If doc_id is a local file path (from gdown), don't link to Drive
-            link = "#"
-        else:
-            link = f"https://drive.google.com/file/d/{doc_id}/view"
-        sources.append({"name": name, "link": link})
+        sources.append({"name": name, "link": "#"})  # We removed Drive links since uploads are local
+
+    # Filter out sensitive or huge keys from context_chunks if needed, but we want chunk_text and relevance_score
+    clean_chunks = []
+    for c in context_chunks:
+        clean_chunks.append({
+            "file_name": c.get("file_name", "Unknown"),
+            "chunk_text": c.get("chunk_text", ""),
+            "relevance_score": c.get("relevance_score", 0.0)
+        })
 
     return {
         "answer": answer,
         "sources": sources,
         "chunks_used": len(context_chunks),
+        "chunks": clean_chunks
     }
 
 
