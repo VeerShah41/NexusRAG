@@ -8,8 +8,9 @@ export const apiFetch = async (url, options = {}) => {
   const headers = new Headers(options.headers || {})
   headers.set('x-user-id', userId)
   
-  // if Content-Type is not set and body is not FormData, default to application/json
-  // Actually, the components themselves set Content-Type correctly, so we just pass options through.
+  // Support remote backend URLs in production
+  const baseUrl = import.meta.env.VITE_API_URL || ''
+  const fullUrl = url.startsWith('http') ? url : `${baseUrl}${url}`
   
-  return fetch(url, { ...options, headers })
+  return fetch(fullUrl, { ...options, headers })
 }
