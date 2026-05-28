@@ -6,6 +6,10 @@
 
 NexusRAG is a lightweight, AI-powered document assistant designed for processing, indexing, and querying multi-format text documents. It allows users to upload local files or synchronize entire Google Drive directories, transforming static text into a highly intelligent, interactive knowledge base using Retrieval-Augmented Generation (RAG).
 
+<br/>
+
+**[🎥 Watch the Full Video Demo Here](https://drive.google.com/file/d/1m00rmklkygDf9N06poCq95WLgnAYKNpI/view?usp=sharing)**
+
 </div>
 
 ---
