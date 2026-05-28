@@ -31,9 +31,9 @@ Answer:"""
     return prompt
 
 
-def _call_groq(prompt: str) -> str:
+def _call_groq(prompt: str, api_key: str = None) -> str:
     """Call Groq API with llama-3.3-70b-versatile model."""
-    client = Groq(api_key=GROQ_API_KEY)
+    client = Groq(api_key=api_key or GROQ_API_KEY)
     response = client.chat.completions.create(
         model="llama-3.3-70b-versatile",
         messages=[{"role": "user", "content": prompt}],
@@ -43,16 +43,16 @@ def _call_groq(prompt: str) -> str:
     return response.choices[0].message.content.strip()
 
 
-def _call_gemini(prompt: str) -> str:
+def _call_gemini(prompt: str, api_key: str = None) -> str:
     """Call Google Gemini API."""
     import google.generativeai as genai
-    genai.configure(api_key=GEMINI_API_KEY)
+    genai.configure(api_key=api_key or GEMINI_API_KEY)
     model = genai.GenerativeModel("gemini-1.5-flash")
     response = model.generate_content(prompt)
     return response.text.strip()
 
 
-def generate_answer(query: str, context_chunks: list[dict]) -> dict:
+def generate_answer(query: str, context_chunks: list[dict], provider: str = None, api_key: str = None) -> dict:
     """
     Generate a grounded answer using the LLM based on retrieved context.
 
@@ -73,10 +73,11 @@ def generate_answer(query: str, context_chunks: list[dict]) -> dict:
     prompt = _build_prompt(query, context_chunks)
 
     try:
-        if LLM_PROVIDER == "gemini":
-            answer = _call_gemini(prompt)
+        active_provider = provider or LLM_PROVIDER
+        if active_provider == "gemini":
+            answer = _call_gemini(prompt, api_key)
         else:
-            answer = _call_groq(prompt)
+            answer = _call_groq(prompt, api_key)
     except Exception as e:
         return {
             "answer": f"LLM error: {str(e)}",
@@ -112,7 +113,7 @@ def generate_answer(query: str, context_chunks: list[dict]) -> dict:
     }
 
 
-def generate_recommendations(sample_chunks: list[str]) -> list[str]:
+def generate_recommendations(sample_chunks: list[str], provider: str = None, api_key: str = None) -> list[str]:
     """Generate 3 suggested questions based on document content."""
     if not sample_chunks:
         return [
@@ -134,10 +135,11 @@ Document Snippets:
 Suggested Questions:"""
 
     try:
-        if LLM_PROVIDER == "gemini":
-            raw_output = _call_gemini(prompt)
+        active_provider = provider or LLM_PROVIDER
+        if active_provider == "gemini":
+            raw_output = _call_gemini(prompt, api_key)
         else:
-            raw_output = _call_groq(prompt)
+            raw_output = _call_groq(prompt, api_key)
         
         questions = [q.strip() for q in raw_output.split("\n") if q.strip()][:3]
         return questions
