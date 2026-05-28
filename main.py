@@ -13,20 +13,9 @@ app = FastAPI(
 )
 
 # CORS configuration
-origins = [
-    "http://localhost:5173",
-    "http://localhost:8000",
-    "http://localhost:3000",
-    "http://127.0.0.1:5173",
-    "http://127.0.0.1:8000",
-    "http://127.0.0.1:3000",
-    "http://0.0.0.0:8000",
-    "http://0.0.0.0:5173",
-]
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"], # Allow Vercel and all domains
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -43,14 +32,9 @@ async def log_requests(request: Request, call_next):
 # Register all routes
 app.include_router(router)
 
-# Serve frontend from dist folder
-import os
-os.makedirs("frontend/dist", exist_ok=True)
-app.mount("/assets", StaticFiles(directory="frontend/dist/assets"), name="assets")
-
-@app.get("/", tags=["Frontend"])
-def serve_frontend():
-    return FileResponse("frontend/dist/index.html")
+@app.get("/", tags=["Health"])
+def health_check():
+    return {"status": "NexusRAG API is running perfectly!"}
 
 if __name__ == "__main__":
     import uvicorn
