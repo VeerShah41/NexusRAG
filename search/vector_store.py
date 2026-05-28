@@ -5,8 +5,8 @@ import faiss
 
 from config import get_faiss_index_path, get_metadata_path
 
-# FAISS dimension must match the embedding model output (text-embedding-004 = 768)
-EMBEDDING_DIM = 768
+# FAISS dimension must match the embedding model output (all-MiniLM-L6-v2 = 384)
+EMBEDDING_DIM = 384
 
 
 def _load_metadata(user_id: str) -> dict:
