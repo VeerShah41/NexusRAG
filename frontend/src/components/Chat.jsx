@@ -1,233 +1,204 @@
 import { useState, useRef, useEffect } from 'react'
-import { Send, User, Bot, Loader, HelpCircle, ChevronDown, ChevronUp } from 'lucide-react'
+import { Send, MessageSquare, Cpu, BookOpen } from 'lucide-react'
+import { apiFetch } from '../api'
 
-export default function Chat({ isReady }) {
-  const [messages, setMessages] = useState([])
-  const [input, setInput] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [recommendations, setRecommendations] = useState([])
-  const messagesEndRef = useRef(null)
+export default function Chat({ isReady, onDebugUpdate, toggleDrawer }) {
+    const [messages, setMessages] = useState([
+        { role: 'ai', content: 'Welcome to NexusRAG. Ask me anything about your indexed documents.' }
+    ])
+    const [input, setInput] = useState('')
+    const [loading, setLoading] = useState(false)
+    const [recommendations, setRecommendations] = useState([])
+    const chatHistoryRef = useRef(null)
+    const textareaRef = useRef(null)
+    const idRef = useRef(0)
 
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }, [messages])
+    useEffect(() => {
+        if (chatHistoryRef.current) {
+            chatHistoryRef.current.scrollTop = chatHistoryRef.current.scrollHeight
+        }
+    }, [messages])
 
-  useEffect(() => {
-    if (isReady && messages.length === 0) {
-      fetchRecommendations()
+    useEffect(() => {
+        let active = true
+        if (isReady && recommendations.length === 0) {
+            const load = async () => {
+                try {
+                    const provider = localStorage.getItem('nexus-provider')
+                    const apiKey = localStorage.getItem('nexus-api-key')
+                    const headers = {}
+                    if (provider) headers['x-llm-provider'] = provider
+                    if (apiKey) headers['x-llm-api-key'] = apiKey
+
+                    const res = await apiFetch('/recommend-questions', { headers })
+                    if (res.ok && active) {
+                        const data = await res.json()
+                        setRecommendations(data.questions || [])
+                    }
+                } catch (err) {
+                    console.error("Failed to load recommendations", err)
+                }
+            }
+            load()
+        }
+        return () => { active = false }
+    }, [isReady, recommendations.length])
+
+    const handleSend = async (query = input) => {
+        if (!query.trim() || loading) return
+
+        const userMsg = { role: 'user', content: query }
+        const currentId = ++idRef.current
+        const aiId = `ai-${currentId}`
+        const aiMsgPlaceholder = { role: 'ai', content: '__typing__', id: aiId }
+
+        setMessages(prev => [...prev, userMsg, aiMsgPlaceholder])
+        setInput('')
+        if (textareaRef.current) textareaRef.current.style.height = 'auto'
+        setLoading(true)
+
+        try {
+            const provider = localStorage.getItem('nexus-provider')
+            const apiKey = localStorage.getItem('nexus-api-key')
+            const headers = { 'Content-Type': 'application/json' }
+            if (provider) headers['x-llm-provider'] = provider
+            if (apiKey) headers['x-llm-api-key'] = apiKey
+
+            const res = await apiFetch('/ask', {
+                method: 'POST',
+                headers,
+                body: JSON.stringify({ query })
+            })
+            const data = await res.json()
+
+            if (res.ok) {
+                setMessages(prev => prev.map(m => m.id === aiId ? {
+                    role: 'ai',
+                    content: data.answer,
+                    sources: data.sources
+                } : m))
+                if (data.chunks) {
+                    onDebugUpdate(data.chunks)
+                    toggleDrawer(true, 'ask')
+                }
+            } else {
+                setMessages(prev => prev.map(m => m.id === aiId ? {
+                    role: 'ai',
+                    content: `Error: ${data.detail}`
+                } : m))
+            }
+        } catch (err) {
+            console.error("Query failed", err)
+            setMessages(prev => prev.map(m => m.id === aiId ? {
+                role: 'ai',
+                content: 'Connection error — please try again.'
+            } : m))
+        } finally {
+            setLoading(false)
+        }
     }
-  }, [isReady, messages.length])
 
-  const fetchRecommendations = async () => {
-    try {
-      const res = await fetch('/recommend-questions')
-      if (res.ok) {
-        const data = await res.json()
-        setRecommendations(data.questions || [])
-      }
-    } catch (e) {
-      console.error("Failed to fetch recommendations", e)
+    const handleTextareaInput = (e) => {
+        const el = e.target
+        el.style.height = 'auto'
+        el.style.height = Math.min(el.scrollHeight, 150) + 'px'
+        setInput(el.value)
     }
-  }
 
-  const handleSend = async (query) => {
-    if (!query.trim()) return
-    
-    const userMsg = { role: 'user', content: query }
-    setMessages(prev => [...prev, userMsg])
-    setInput('')
-    setLoading(true)
-
-    try {
-      const res = await fetch('/ask', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ query })
-      })
-      const data = await res.json()
-      
-      if (res.ok) {
-        setMessages(prev => [...prev, { 
-          role: 'assistant', 
-          content: data.answer,
-          chunks: data.chunks,
-          sources: data.sources 
-        }])
-      } else {
-        setMessages(prev => [...prev, { role: 'assistant', content: `Error: ${data.detail}`, isError: true }])
-      }
-    } catch (err) {
-      setMessages(prev => [...prev, { role: 'assistant', content: 'Network error while connecting to the server.', isError: true }])
-    } finally {
-      setLoading(false)
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault()
+            handleSend()
+        }
     }
-  }
 
-  if (!isReady) {
+    if (!isReady) {
+        return (
+            <div className="page-container page-fade-in">
+                <div className="empty-state">
+                    <div className="empty-state-icon">
+                        <MessageSquare size={28} />
+                    </div>
+                    <h3>Knowledge Base Empty</h3>
+                    <p>Upload or sync some documents first to start chatting with NexusRAG.</p>
+                </div>
+            </div>
+        )
+    }
+
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', color: 'var(--text-muted)' }}>
-        <HelpCircle size={48} style={{ marginBottom: '1rem', opacity: 0.5 }} />
-        <h3>Knowledge Base Empty</h3>
-        <p style={{ marginTop: '0.5rem' }}>Upload some documents first to start chatting.</p>
-      </div>
-    )
-  }
-
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-      {/* Messages Area */}
-      <div style={{ flex: 1, overflowY: 'auto', padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-        
-        {messages.length === 0 && (
-          <div style={{ margin: 'auto', maxWidth: '600px', textAlign: 'center' }}>
-            <div style={{ display: 'inline-flex', padding: '1rem', background: 'rgba(99, 102, 241, 0.1)', borderRadius: '50%', marginBottom: '1.5rem' }}>
-              <Bot size={48} color="var(--primary)" />
-            </div>
-            <h2 style={{ marginBottom: '1rem', color: '#fff' }}>How can I help you today?</h2>
-            <p style={{ color: 'var(--text-muted)', marginBottom: '2rem' }}>
-              Ask anything about the documents in your knowledge base.
-            </p>
-            
-            {recommendations.length > 0 && (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'center' }}>
-                <p style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '1px', color: 'var(--text-muted)', marginBottom: '0.5rem' }}>Suggested Questions</p>
-                {recommendations.map((rec, i) => (
-                  <button 
-                    key={i}
-                    className="btn btn-secondary" 
-                    style={{ width: '100%', maxWidth: '400px', padding: '0.75rem', fontSize: '0.9rem', borderRadius: 'var(--radius-lg)' }}
-                    onClick={() => handleSend(rec)}
-                  >
-                    {rec}
-                  </button>
-                ))}
-              </div>
-            )}
-          </div>
-        )}
-
-        {messages.map((msg, i) => (
-          <div key={i} style={{ display: 'flex', gap: '1rem', flexDirection: msg.role === 'user' ? 'row-reverse' : 'row' }}>
-            <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: msg.role === 'user' ? 'rgba(255,255,255,0.1)' : 'var(--primary)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-              {msg.role === 'user' ? <User size={20} /> : <Bot size={20} />}
-            </div>
-            
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', maxWidth: '80%', alignItems: msg.role === 'user' ? 'flex-end' : 'flex-start' }}>
-              <div style={{ 
-                background: msg.role === 'user' ? 'var(--bg-glass-hover)' : 'rgba(0,0,0,0.2)', 
-                border: '1px solid var(--border)',
-                padding: '1rem', 
-                borderRadius: 'var(--radius-lg)', 
-                borderTopRightRadius: msg.role === 'user' ? 0 : 'var(--radius-lg)',
-                borderTopLeftRadius: msg.role === 'assistant' ? 0 : 'var(--radius-lg)',
-                color: msg.isError ? 'var(--error)' : 'var(--text-main)',
-                lineHeight: 1.6,
-                whiteSpace: 'pre-wrap'
-              }}>
-                {msg.content}
-              </div>
-
-              {/* Sources and Relevance Ranking */}
-              {msg.chunks && msg.chunks.length > 0 && (
-                <div style={{ width: '100%' }}>
-                  <SourcesPanel chunks={msg.chunks} />
-                </div>
-              )}
-            </div>
-          </div>
-        ))}
-
-        {loading && (
-          <div style={{ display: 'flex', gap: '1rem' }}>
-            <div style={{ width: '36px', height: '36px', borderRadius: '50%', background: 'var(--primary)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <Bot size={20} />
-            </div>
-            <div style={{ padding: '1rem', background: 'rgba(0,0,0,0.2)', borderRadius: 'var(--radius-lg)', borderTopLeftRadius: 0, display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)' }}>
-              <Loader size={16} className="animate-spin" /> Thinking...
-            </div>
-          </div>
-        )}
-
-        <div ref={messagesEndRef} />
-      </div>
-
-      {/* Input Area */}
-      <div style={{ padding: '1rem 1.5rem', borderTop: '1px solid var(--border)', background: 'var(--bg-glass)' }}>
-        <form 
-          onSubmit={(e) => { e.preventDefault(); handleSend(input); }}
-          style={{ display: 'flex', gap: '0.5rem' }}
-        >
-          <input 
-            type="text" 
-            className="input-field" 
-            placeholder="Ask a question about your documents..." 
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            disabled={loading}
-            style={{ borderRadius: 'var(--radius-lg)' }}
-          />
-          <button 
-            type="submit" 
-            className="btn btn-primary" 
-            disabled={!input.trim() || loading}
-            style={{ borderRadius: 'var(--radius-lg)', padding: '0 1.5rem' }}
-          >
-            <Send size={18} />
-          </button>
-        </form>
-      </div>
-    </div>
-  )
-}
-
-function SourcesPanel({ chunks }) {
-  const [isOpen, setIsOpen] = useState(false)
-
-  // deduplicate files for quick summary
-  const uniqueFiles = [...new Set(chunks.map(c => c.file_name))]
-
-  return (
-    <div style={{ background: 'rgba(0,0,0,0.3)', border: '1px solid var(--border)', borderRadius: 'var(--radius-md)', overflow: 'hidden', marginTop: '0.5rem', width: '100%' }}>
-      <button 
-        style={{ width: '100%', padding: '0.75rem 1rem', background: 'transparent', border: 'none', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer', fontSize: '0.85rem' }}
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-          <Database size={14} /> Retrieved Context ({chunks.length} chunks from {uniqueFiles.length} file{uniqueFiles.length > 1 ? 's' : ''})
-        </span>
-        {isOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
-      </button>
-
-      {isOpen && (
-        <div style={{ padding: '1rem', borderTop: '1px solid var(--border)', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '-0.5rem', textTransform: 'uppercase' }}>Relevance Ranking</p>
-          {chunks.map((chunk, i) => {
-            // Inner product scores usually vary, we'll normalize them to a rough percentage for UI (assuming they are usually around 10-100+)
-            // Just a visual representation
-            const percentage = Math.min(100, Math.max(10, Math.round((chunk.relevance_score / 150) * 100)))
-            
-            return (
-              <div key={i} style={{ fontSize: '0.85rem' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '4px' }}>
-                  <span style={{ color: '#fff', fontWeight: 500, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '70%' }}>
-                    📄 {chunk.file_name}
-                  </span>
-                  <span style={{ color: 'var(--accent)', fontWeight: 600 }}>{chunk.relevance_score.toFixed(2)} Score</span>
-                </div>
-                
-                {/* Visual Progress Bar */}
-                <div style={{ width: '100%', height: '4px', background: 'rgba(255,255,255,0.1)', borderRadius: '2px', marginBottom: '8px', overflow: 'hidden' }}>
-                  <div style={{ height: '100%', width: `${percentage}%`, background: 'var(--accent)', borderRadius: '2px' }}></div>
+        <div className="page-container page-fade-in">
+            <div className="chat-editorial">
+                <div className="chat-scroller" ref={chatHistoryRef}>
+                    {messages.map((m, i) => (
+                        <div key={i} className={`chat-bubble ${m.role === 'ai' ? 'assistant' : 'user'}`}>
+                            <div className="chat-label">
+                                {m.role === 'ai' ? (
+                                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}>
+                                        <Cpu size={9} /> NexusRAG Engine
+                                    </span>
+                                ) : (
+                                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}>
+                                        <MessageSquare size={9} /> Your Query
+                                    </span>
+                                )}
+                            </div>
+                            <div className="chat-text">
+                                {m.content === '__typing__' ? (
+                                    <div className="typing-dots">
+                                        <span /><span /><span />
+                                    </div>
+                                ) : (
+                                    <>
+                                        {m.content}
+                                        {m.sources && m.sources.length > 0 && (
+                                            <div style={{ marginTop: '1.25rem', display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                                                {m.sources.map((s, si) => (
+                                                    <a key={si} href={s.link} target="_blank" rel="noopener noreferrer" className="source-ref">
+                                                        <BookOpen size={10} />
+                                                        {s.name}
+                                                    </a>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </>
+                                )}
+                            </div>
+                        </div>
+                    ))}
                 </div>
 
-                <div style={{ background: 'rgba(255,255,255,0.05)', padding: '0.5rem', borderRadius: '4px', color: 'var(--text-muted)', fontStyle: 'italic', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
-                  "{chunk.chunk_text}"
+                {recommendations.length > 0 && (
+                    <div className="recommendation-pills">
+                        {recommendations.map((q, i) => (
+                            <button key={i} className="rec-pill" onClick={() => handleSend(q)}>
+                                {q}
+                            </button>
+                        ))}
+                    </div>
+                )}
+
+                <div className="floating-input-wrap">
+                    <textarea
+                        ref={textareaRef}
+                        className="floating-textarea"
+                        placeholder="Ask NexusRAG anything about your documents..."
+                        rows="1"
+                        value={input}
+                        onChange={handleTextareaInput}
+                        onKeyDown={handleKeyDown}
+                    />
+                    <button
+                        className="btn btn-accent"
+                        style={{ padding: '0.55rem 1rem', borderRadius: 10, flexShrink: 0 }}
+                        onClick={() => handleSend()}
+                        disabled={!input.trim() || loading}
+                    >
+                        <Send size={15} />
+                        Query
+                    </button>
                 </div>
-              </div>
-            )
-          })}
+            </div>
         </div>
-      )}
-    </div>
-  )
+    )
 }
