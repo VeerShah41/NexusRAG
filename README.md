@@ -1,16 +1,39 @@
-# NexusRAG — Intelligent Document RAG System
+<div align="center">
+
+# NexusRAG
+
+**Intelligent Document Retrieval & Grounded AI Intelligence**
 
 NexusRAG is a lightweight, AI-powered document assistant designed for processing, indexing, and querying multi-format text documents. It allows users to upload local files or synchronize entire Google Drive directories, transforming static text into a highly intelligent, interactive knowledge base using Retrieval-Augmented Generation (RAG).
 
-## 🖼️ Application Previews
+</div>
 
-### 1. Workspace Overview & Data Ingestion
+---
+
+## Contents
+
+- [Screenshots](#screenshots)
+- [Architecture & Tech Stack](#architecture--tech-stack)
+- [Setup Instructions](#setup-instructions)
+- [Design Decisions & Features](#design-decisions--features)
+- [Assumptions Made](#assumptions-made)
+- [Core API Documentation](#core-api-documentation)
+
+---
+
+## Screenshots
+
+### Workspace Overview & Data Ingestion
+
+A sleek, matte-black and creamy-ivory dashboard providing real-time telemetry on vector chunks, indexed documents, and the active LLM engine status. Users can ingest local PDFs or sync public Google Drive folders.
+
 ![Workspace Overview](assets/dashboard.png)
-*A sleek, matte-black and creamy-ivory dashboard providing real-time telemetry on vector chunks, indexed documents, and the active LLM engine status. Users can ingest local PDFs or sync public Google Drive folders.*
 
-### 2. Intelligent RAG Interface & Retrieval Audit
+### Intelligent RAG Interface & Retrieval Audit
+
+The dynamic query interface featuring grounded LLM responses. The right-side "Retrieval Audit" drawer provides full transparency into the semantic vector search, showing exact context chunks and relevance scoring for maximum traceability.
+
 ![Ask AI Interface](assets/chat.png)
-*The dynamic query interface featuring grounded LLM responses. The right-side "Retrieval Audit" drawer provides full transparency into the semantic vector search, showing exact context chunks and relevance scoring for maximum traceability.*
 
 ---
 
@@ -31,7 +54,7 @@ NexusRAG is a lightweight, AI-powered document assistant designed for processing
 
 ---
 
-## 🚀 Setup Instructions
+## Setup Instructions
 
 ### Prerequisites
 - Node.js (v18+)
@@ -70,7 +93,7 @@ npm run dev
 
 ---
 
-## 🧠 Design Decisions & Features
+## Design Decisions & Features
 
 1. **"Bring Your Own Key" (BYOK) Architecture**  
    Rather than locking users into a single hardcoded LLM, a dedicated **Models** configuration page was built. Users can dynamically inject their personal Groq or Gemini API keys in the UI, overriding server defaults instantly without restarts.
@@ -86,14 +109,14 @@ npm run dev
 
 ---
 
-## ⚠️ Assumptions Made
+## Assumptions Made
 - **File Storage**: Uploaded files are temporarily stored locally in the `/uploads` directory on the server file system rather than an external cloud bucket like S3 to simplify setup.
 - **Native PDF Text**: The extraction engine uses `pdfplumber` for robust text extraction. It assumes uploaded PDFs have native text layers. Complex OCR scanning of purely image-based PDFs is out of scope for this lightweight implementation.
 - **Size Limitation**: A hard limit of 50MB is enforced on the frontend and backend to protect system memory during the text extraction and embedding phases.
 
 ---
 
-## 📖 Core API Documentation
+## Core API Documentation
 
 - `POST /upload`  
   Accepts a `multipart/form-data` file. Extracts text, generates embeddings, and injects chunks into the user's specific FAISS index.
