@@ -44,13 +44,11 @@ def _call_groq(prompt: str, api_key: str = None) -> str:
 
 
 def _call_gemini(prompt: str, api_key: str = None) -> str:
-    """Call Google Gemini API using the new google-genai SDK."""
-    from google import genai
-    client = genai.Client(api_key=api_key or GEMINI_API_KEY)
-    response = client.models.generate_content(
-        model="gemini-2.0-flash",
-        contents=prompt
-    )
+    """Call Google Gemini API."""
+    import google.generativeai as genai
+    genai.configure(api_key=api_key or GEMINI_API_KEY)
+    model = genai.GenerativeModel("gemini-1.5-flash")
+    response = model.generate_content(prompt)
     return response.text.strip()
 
 

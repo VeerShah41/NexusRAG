@@ -12,4 +12,6 @@ numpy
 groq
 requests
 gdown==5.1.0
-google-genai
+gdown
+google-generativeai
+google-generativeai
