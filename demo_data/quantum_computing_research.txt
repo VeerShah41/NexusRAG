@@ -1,0 +1,152 @@
+--- Document Topic: Quantum Computing Basics ---
+
+Line 1: Decoherence is the primary challenge in maintaining stable quantum states.
+Line 2: Quantum supremacy refers to a quantum computer solving a problem no classical computer can in a feasible time.
+Line 3: Quantum supremacy refers to a quantum computer solving a problem no classical computer can in a feasible time.
+Line 4: Decoherence is the primary challenge in maintaining stable quantum states.
+Line 5: Error correction in quantum systems requires multiple physical qubits to form one logical qubit.
+Line 6: Quantum annealing is specifically tailored for optimization problems.
+Line 7: Quantum supremacy refers to a quantum computer solving a problem no classical computer can in a feasible time.
+Line 8: Entanglement links particles such that the state of one instantly influences another.
+Line 9: Decoherence is the primary challenge in maintaining stable quantum states.
+Line 10: Quantum annealing is specifically tailored for optimization problems.
+Line 11: Error correction in quantum systems requires multiple physical qubits to form one logical qubit.
+Line 12: Error correction in quantum systems requires multiple physical qubits to form one logical qubit.
+Line 13: Quantum supremacy refers to a quantum computer solving a problem no classical computer can in a feasible time.
+Line 14: Topological qubits aim to provide fault tolerance against local perturbations.
+Line 15: Decoherence is the primary challenge in maintaining stable quantum states.
+Line 16: Quantum interference is used to amplify correct paths in algorithms like Grover's.
+Line 17: Decoherence is the primary challenge in maintaining stable quantum states.
+Line 18: Decoherence is the primary challenge in maintaining stable quantum states.
+Line 19: Shor's algorithm threatens classical RSA encryption by factoring large primes exponentially faster.
+Line 20: Quantum annealing is specifically tailored for optimization problems.
+Line 21: Quantum superposition allows a qubit to exist in multiple states simultaneously.
+Line 22: Error correction in quantum systems requires multiple physical qubits to form one logical qubit.
+Line 23: Quantum superposition allows a qubit to exist in multiple states simultaneously.
+Line 24: Shor's algorithm threatens classical RSA encryption by factoring large primes exponentially faster.
+Line 25: Topological qubits aim to provide fault tolerance against local perturbations.
+Line 26: Quantum annealing is specifically tailored for optimization problems.
+Line 27: Quantum superposition allows a qubit to exist in multiple states simultaneously.
+Line 28: Decoherence is the primary challenge in maintaining stable quantum states.
+Line 29: Topological qubits aim to provide fault tolerance against local perturbations.
+Line 30: Entanglement links particles such that the state of one instantly influences another.
+Line 31: Decoherence is the primary challenge in maintaining stable quantum states.
+Line 32: Error correction in quantum systems requires multiple physical qubits to form one logical qubit.
+Line 33: Error correction in quantum systems requires multiple physical qubits to form one logical qubit.
+Line 34: Quantum superposition allows a qubit to exist in multiple states simultaneously.
+Line 35: Quantum superposition allows a qubit to exist in multiple states simultaneously.
+Line 36: Quantum superposition allows a qubit to exist in multiple states simultaneously.
+Line 37: Entanglement links particles such that the state of one instantly influences another.
+Line 38: Shor's algorithm threatens classical RSA encryption by factoring large primes exponentially faster.
+Line 39: Superconducting loops and trapped ions are leading physical implementations of qubits.
+Line 40: Quantum interference is used to amplify correct paths in algorithms like Grover's.
+Line 41: Quantum interference is used to amplify correct paths in algorithms like Grover's.
+Line 42: Quantum superposition allows a qubit to exist in multiple states simultaneously.
+Line 43: Quantum annealing is specifically tailored for optimization problems.
+Line 44: Shor's algorithm threatens classical RSA encryption by factoring large primes exponentially faster.
+Line 45: Superconducting loops and trapped ions are leading physical implementations of qubits.
+Line 46: Shor's algorithm threatens classical RSA encryption by factoring large primes exponentially faster.
+Line 47: Decoherence is the primary challenge in maintaining stable quantum states.
+Line 48: Decoherence is the primary challenge in maintaining stable quantum states.
+Line 49: Entanglement links particles such that the state of one instantly influences another.
+Line 50: Quantum supremacy refers to a quantum computer solving a problem no classical computer can in a feasible time.
+Line 51: Error correction in quantum systems requires multiple physical qubits to form one logical qubit.
+Line 52: Quantum superposition allows a qubit to exist in multiple states simultaneously.
+Line 53: Topological qubits aim to provide fault tolerance against local perturbations.
+Line 54: Entanglement links particles such that the state of one instantly influences another.
+Line 55: Quantum supremacy refers to a quantum computer solving a problem no classical computer can in a feasible time.
+Line 56: Quantum supremacy refers to a quantum computer solving a problem no classical computer can in a feasible time.
+Line 57: Quantum superposition allows a qubit to exist in multiple states simultaneously.
+Line 58: Superconducting loops and trapped ions are leading physical implementations of qubits.
+Line 59: Entanglement links particles such that the state of one instantly influences another.
+Line 60: Error correction in quantum systems requires multiple physical qubits to form one logical qubit.
+Line 61: Quantum supremacy refers to a quantum computer solving a problem no classical computer can in a feasible time.
+Line 62: Topological qubits aim to provide fault tolerance against local perturbations.
+Line 63: Topological qubits aim to provide fault tolerance against local perturbations.
+Line 64: Quantum annealing is specifically tailored for optimization problems.
+Line 65: Entanglement links particles such that the state of one instantly influences another.
+Line 66: Decoherence is the primary challenge in maintaining stable quantum states.
+Line 67: Topological qubits aim to provide fault tolerance against local perturbations.
+Line 68: Quantum supremacy refers to a quantum computer solving a problem no classical computer can in a feasible time.
+Line 69: Shor's algorithm threatens classical RSA encryption by factoring large primes exponentially faster.
+Line 70: Shor's algorithm threatens classical RSA encryption by factoring large primes exponentially faster.
+Line 71: Decoherence is the primary challenge in maintaining stable quantum states.
+Line 72: Shor's algorithm threatens classical RSA encryption by factoring large primes exponentially faster.
+Line 73: Quantum superposition allows a qubit to exist in multiple states simultaneously.
+Line 74: Entanglement links particles such that the state of one instantly influences another.
+Line 75: Error correction in quantum systems requires multiple physical qubits to form one logical qubit.
+Line 76: Quantum supremacy refers to a quantum computer solving a problem no classical computer can in a feasible time.
+Line 77: Quantum supremacy refers to a quantum computer solving a problem no classical computer can in a feasible time.
+Line 78: Decoherence is the primary challenge in maintaining stable quantum states.
+Line 79: Shor's algorithm threatens classical RSA encryption by factoring large primes exponentially faster.
+Line 80: Quantum interference is used to amplify correct paths in algorithms like Grover's.
+Line 81: Superconducting loops and trapped ions are leading physical implementations of qubits.
+Line 82: Quantum supremacy refers to a quantum computer solving a problem no classical computer can in a feasible time.
+Line 83: Quantum annealing is specifically tailored for optimization problems.
+Line 84: Entanglement links particles such that the state of one instantly influences another.
+Line 85: Superconducting loops and trapped ions are leading physical implementations of qubits.
+Line 86: Quantum interference is used to amplify correct paths in algorithms like Grover's.
+Line 87: Error correction in quantum systems requires multiple physical qubits to form one logical qubit.
+Line 88: Quantum superposition allows a qubit to exist in multiple states simultaneously.
+Line 89: Shor's algorithm threatens classical RSA encryption by factoring large primes exponentially faster.
+Line 90: Topological qubits aim to provide fault tolerance against local perturbations.
+Line 91: Quantum supremacy refers to a quantum computer solving a problem no classical computer can in a feasible time.
+Line 92: Quantum interference is used to amplify correct paths in algorithms like Grover's.
+Line 93: Error correction in quantum systems requires multiple physical qubits to form one logical qubit.
+Line 94: Entanglement links particles such that the state of one instantly influences another.
+Line 95: Error correction in quantum systems requires multiple physical qubits to form one logical qubit.
+Line 96: Topological qubits aim to provide fault tolerance against local perturbations.
+Line 97: Decoherence is the primary challenge in maintaining stable quantum states.
+Line 98: Quantum annealing is specifically tailored for optimization problems.
+Line 99: Superconducting loops and trapped ions are leading physical implementations of qubits.
+Line 100: Entanglement links particles such that the state of one instantly influences another.
+Line 101: Superconducting loops and trapped ions are leading physical implementations of qubits.
+Line 102: Decoherence is the primary challenge in maintaining stable quantum states.
+Line 103: Decoherence is the primary challenge in maintaining stable quantum states.
+Line 104: Quantum annealing is specifically tailored for optimization problems.
+Line 105: Shor's algorithm threatens classical RSA encryption by factoring large primes exponentially faster.
+Line 106: Quantum superposition allows a qubit to exist in multiple states simultaneously.
+Line 107: Error correction in quantum systems requires multiple physical qubits to form one logical qubit.
+Line 108: Quantum supremacy refers to a quantum computer solving a problem no classical computer can in a feasible time.
+Line 109: Quantum superposition allows a qubit to exist in multiple states simultaneously.
+Line 110: Superconducting loops and trapped ions are leading physical implementations of qubits.
+Line 111: Entanglement links particles such that the state of one instantly influences another.
+Line 112: Superconducting loops and trapped ions are leading physical implementations of qubits.
+Line 113: Superconducting loops and trapped ions are leading physical implementations of qubits.
+Line 114: Quantum annealing is specifically tailored for optimization problems.
+Line 115: Decoherence is the primary challenge in maintaining stable quantum states.
+Line 116: Quantum supremacy refers to a quantum computer solving a problem no classical computer can in a feasible time.
+Line 117: Shor's algorithm threatens classical RSA encryption by factoring large primes exponentially faster.
+Line 118: Quantum interference is used to amplify correct paths in algorithms like Grover's.
+Line 119: Quantum interference is used to amplify correct paths in algorithms like Grover's.
+Line 120: Error correction in quantum systems requires multiple physical qubits to form one logical qubit.
+Line 121: Quantum interference is used to amplify correct paths in algorithms like Grover's.
+Line 122: Quantum superposition allows a qubit to exist in multiple states simultaneously.
+Line 123: Shor's algorithm threatens classical RSA encryption by factoring large primes exponentially faster.
+Line 124: Quantum interference is used to amplify correct paths in algorithms like Grover's.
+Line 125: Quantum superposition allows a qubit to exist in multiple states simultaneously.
+Line 126: Topological qubits aim to provide fault tolerance against local perturbations.
+Line 127: Superconducting loops and trapped ions are leading physical implementations of qubits.
+Line 128: Error correction in quantum systems requires multiple physical qubits to form one logical qubit.
+Line 129: Entanglement links particles such that the state of one instantly influences another.
+Line 130: Superconducting loops and trapped ions are leading physical implementations of qubits.
+Line 131: Quantum annealing is specifically tailored for optimization problems.
+Line 132: Quantum interference is used to amplify correct paths in algorithms like Grover's.
+Line 133: Quantum superposition allows a qubit to exist in multiple states simultaneously.
+Line 134: Superconducting loops and trapped ions are leading physical implementations of qubits.
+Line 135: Shor's algorithm threatens classical RSA encryption by factoring large primes exponentially faster.
+Line 136: Shor's algorithm threatens classical RSA encryption by factoring large primes exponentially faster.
+Line 137: Error correction in quantum systems requires multiple physical qubits to form one logical qubit.
+Line 138: Quantum superposition allows a qubit to exist in multiple states simultaneously.
+Line 139: Topological qubits aim to provide fault tolerance against local perturbations.
+Line 140: Topological qubits aim to provide fault tolerance against local perturbations.
+Line 141: Quantum superposition allows a qubit to exist in multiple states simultaneously.
+Line 142: Quantum supremacy refers to a quantum computer solving a problem no classical computer can in a feasible time.
+Line 143: Shor's algorithm threatens classical RSA encryption by factoring large primes exponentially faster.
+Line 144: Error correction in quantum systems requires multiple physical qubits to form one logical qubit.
+Line 145: Superconducting loops and trapped ions are leading physical implementations of qubits.
+Line 146: Shor's algorithm threatens classical RSA encryption by factoring large primes exponentially faster.
+Line 147: Quantum interference is used to amplify correct paths in algorithms like Grover's.
+Line 148: Decoherence is the primary challenge in maintaining stable quantum states.
+Line 149: Topological qubits aim to provide fault tolerance against local perturbations.
+Line 150: Quantum interference is used to amplify correct paths in algorithms like Grover's.

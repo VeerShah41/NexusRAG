@@ -1,0 +1,152 @@
+--- Document Topic: Principles of Cryptography ---
+
+Line 1: Symmetric encryption uses a single shared key for both encryption and decryption.
+Line 2: A nonce is an arbitrary number used only once in a cryptographic communication to prevent replay attacks.
+Line 3: Elliptic Curve Cryptography (ECC) offers similar security to RSA but with significantly smaller key sizes.
+Line 4: Public Key Infrastructure (PKI) manages digital certificates to establish trust over networks.
+Line 5: RSA algorithm relies on the practical difficulty of factoring the product of two large prime numbers.
+Line 6: A cryptographic hash must be deterministic, quick to compute, and collision-resistant.
+Line 7: Asymmetric encryption employs a public key for encryption and a private key for decryption.
+Line 8: Hash functions map input data of arbitrary size to a fixed-size bit string.
+Line 9: Digital signatures provide authentication, non-repudiation, and data integrity.
+Line 10: Digital signatures provide authentication, non-repudiation, and data integrity.
+Line 11: A cryptographic hash must be deterministic, quick to compute, and collision-resistant.
+Line 12: RSA algorithm relies on the practical difficulty of factoring the product of two large prime numbers.
+Line 13: A nonce is an arbitrary number used only once in a cryptographic communication to prevent replay attacks.
+Line 14: The Advanced Encryption Standard (AES) is a symmetric block cipher widely used globally.
+Line 15: Symmetric encryption uses a single shared key for both encryption and decryption.
+Line 16: A cryptographic hash must be deterministic, quick to compute, and collision-resistant.
+Line 17: The Advanced Encryption Standard (AES) is a symmetric block cipher widely used globally.
+Line 18: Hash functions map input data of arbitrary size to a fixed-size bit string.
+Line 19: The Advanced Encryption Standard (AES) is a symmetric block cipher widely used globally.
+Line 20: A cryptographic hash must be deterministic, quick to compute, and collision-resistant.
+Line 21: Asymmetric encryption employs a public key for encryption and a private key for decryption.
+Line 22: Hash functions map input data of arbitrary size to a fixed-size bit string.
+Line 23: RSA algorithm relies on the practical difficulty of factoring the product of two large prime numbers.
+Line 24: RSA algorithm relies on the practical difficulty of factoring the product of two large prime numbers.
+Line 25: The Advanced Encryption Standard (AES) is a symmetric block cipher widely used globally.
+Line 26: A cryptographic hash must be deterministic, quick to compute, and collision-resistant.
+Line 27: Hash functions map input data of arbitrary size to a fixed-size bit string.
+Line 28: Hash functions map input data of arbitrary size to a fixed-size bit string.
+Line 29: A cryptographic hash must be deterministic, quick to compute, and collision-resistant.
+Line 30: Symmetric encryption uses a single shared key for both encryption and decryption.
+Line 31: Public Key Infrastructure (PKI) manages digital certificates to establish trust over networks.
+Line 32: Public Key Infrastructure (PKI) manages digital certificates to establish trust over networks.
+Line 33: Public Key Infrastructure (PKI) manages digital certificates to establish trust over networks.
+Line 34: A nonce is an arbitrary number used only once in a cryptographic communication to prevent replay attacks.
+Line 35: Digital signatures provide authentication, non-repudiation, and data integrity.
+Line 36: The Advanced Encryption Standard (AES) is a symmetric block cipher widely used globally.
+Line 37: The Advanced Encryption Standard (AES) is a symmetric block cipher widely used globally.
+Line 38: Hash functions map input data of arbitrary size to a fixed-size bit string.
+Line 39: Public Key Infrastructure (PKI) manages digital certificates to establish trust over networks.
+Line 40: A nonce is an arbitrary number used only once in a cryptographic communication to prevent replay attacks.
+Line 41: Public Key Infrastructure (PKI) manages digital certificates to establish trust over networks.
+Line 42: Symmetric encryption uses a single shared key for both encryption and decryption.
+Line 43: Symmetric encryption uses a single shared key for both encryption and decryption.
+Line 44: A cryptographic hash must be deterministic, quick to compute, and collision-resistant.
+Line 45: Hash functions map input data of arbitrary size to a fixed-size bit string.
+Line 46: Public Key Infrastructure (PKI) manages digital certificates to establish trust over networks.
+Line 47: Hash functions map input data of arbitrary size to a fixed-size bit string.
+Line 48: Public Key Infrastructure (PKI) manages digital certificates to establish trust over networks.
+Line 49: Public Key Infrastructure (PKI) manages digital certificates to establish trust over networks.
+Line 50: The Advanced Encryption Standard (AES) is a symmetric block cipher widely used globally.
+Line 51: A nonce is an arbitrary number used only once in a cryptographic communication to prevent replay attacks.
+Line 52: Symmetric encryption uses a single shared key for both encryption and decryption.
+Line 53: The Advanced Encryption Standard (AES) is a symmetric block cipher widely used globally.
+Line 54: Hash functions map input data of arbitrary size to a fixed-size bit string.
+Line 55: Hash functions map input data of arbitrary size to a fixed-size bit string.
+Line 56: Digital signatures provide authentication, non-repudiation, and data integrity.
+Line 57: Symmetric encryption uses a single shared key for both encryption and decryption.
+Line 58: Symmetric encryption uses a single shared key for both encryption and decryption.
+Line 59: Hash functions map input data of arbitrary size to a fixed-size bit string.
+Line 60: Elliptic Curve Cryptography (ECC) offers similar security to RSA but with significantly smaller key sizes.
+Line 61: RSA algorithm relies on the practical difficulty of factoring the product of two large prime numbers.
+Line 62: Symmetric encryption uses a single shared key for both encryption and decryption.
+Line 63: Public Key Infrastructure (PKI) manages digital certificates to establish trust over networks.
+Line 64: Asymmetric encryption employs a public key for encryption and a private key for decryption.
+Line 65: Public Key Infrastructure (PKI) manages digital certificates to establish trust over networks.
+Line 66: Elliptic Curve Cryptography (ECC) offers similar security to RSA but with significantly smaller key sizes.
+Line 67: Symmetric encryption uses a single shared key for both encryption and decryption.
+Line 68: Asymmetric encryption employs a public key for encryption and a private key for decryption.
+Line 69: Hash functions map input data of arbitrary size to a fixed-size bit string.
+Line 70: A cryptographic hash must be deterministic, quick to compute, and collision-resistant.
+Line 71: Hash functions map input data of arbitrary size to a fixed-size bit string.
+Line 72: The Advanced Encryption Standard (AES) is a symmetric block cipher widely used globally.
+Line 73: Symmetric encryption uses a single shared key for both encryption and decryption.
+Line 74: The Advanced Encryption Standard (AES) is a symmetric block cipher widely used globally.
+Line 75: Elliptic Curve Cryptography (ECC) offers similar security to RSA but with significantly smaller key sizes.
+Line 76: Hash functions map input data of arbitrary size to a fixed-size bit string.
+Line 77: Digital signatures provide authentication, non-repudiation, and data integrity.
+Line 78: Symmetric encryption uses a single shared key for both encryption and decryption.
+Line 79: The Advanced Encryption Standard (AES) is a symmetric block cipher widely used globally.
+Line 80: The Advanced Encryption Standard (AES) is a symmetric block cipher widely used globally.
+Line 81: A nonce is an arbitrary number used only once in a cryptographic communication to prevent replay attacks.
+Line 82: Elliptic Curve Cryptography (ECC) offers similar security to RSA but with significantly smaller key sizes.
+Line 83: Public Key Infrastructure (PKI) manages digital certificates to establish trust over networks.
+Line 84: A nonce is an arbitrary number used only once in a cryptographic communication to prevent replay attacks.
+Line 85: Public Key Infrastructure (PKI) manages digital certificates to establish trust over networks.
+Line 86: Hash functions map input data of arbitrary size to a fixed-size bit string.
+Line 87: A cryptographic hash must be deterministic, quick to compute, and collision-resistant.
+Line 88: Hash functions map input data of arbitrary size to a fixed-size bit string.
+Line 89: A nonce is an arbitrary number used only once in a cryptographic communication to prevent replay attacks.
+Line 90: Elliptic Curve Cryptography (ECC) offers similar security to RSA but with significantly smaller key sizes.
+Line 91: Asymmetric encryption employs a public key for encryption and a private key for decryption.
+Line 92: A nonce is an arbitrary number used only once in a cryptographic communication to prevent replay attacks.
+Line 93: Elliptic Curve Cryptography (ECC) offers similar security to RSA but with significantly smaller key sizes.
+Line 94: Asymmetric encryption employs a public key for encryption and a private key for decryption.
+Line 95: The Advanced Encryption Standard (AES) is a symmetric block cipher widely used globally.
+Line 96: Digital signatures provide authentication, non-repudiation, and data integrity.
+Line 97: Symmetric encryption uses a single shared key for both encryption and decryption.
+Line 98: A cryptographic hash must be deterministic, quick to compute, and collision-resistant.
+Line 99: Hash functions map input data of arbitrary size to a fixed-size bit string.
+Line 100: Hash functions map input data of arbitrary size to a fixed-size bit string.
+Line 101: Elliptic Curve Cryptography (ECC) offers similar security to RSA but with significantly smaller key sizes.
+Line 102: Hash functions map input data of arbitrary size to a fixed-size bit string.
+Line 103: A cryptographic hash must be deterministic, quick to compute, and collision-resistant.
+Line 104: RSA algorithm relies on the practical difficulty of factoring the product of two large prime numbers.
+Line 105: Digital signatures provide authentication, non-repudiation, and data integrity.
+Line 106: Symmetric encryption uses a single shared key for both encryption and decryption.
+Line 107: Digital signatures provide authentication, non-repudiation, and data integrity.
+Line 108: RSA algorithm relies on the practical difficulty of factoring the product of two large prime numbers.
+Line 109: A cryptographic hash must be deterministic, quick to compute, and collision-resistant.
+Line 110: Elliptic Curve Cryptography (ECC) offers similar security to RSA but with significantly smaller key sizes.
+Line 111: Digital signatures provide authentication, non-repudiation, and data integrity.
+Line 112: RSA algorithm relies on the practical difficulty of factoring the product of two large prime numbers.
+Line 113: Symmetric encryption uses a single shared key for both encryption and decryption.
+Line 114: Elliptic Curve Cryptography (ECC) offers similar security to RSA but with significantly smaller key sizes.
+Line 115: Public Key Infrastructure (PKI) manages digital certificates to establish trust over networks.
+Line 116: A cryptographic hash must be deterministic, quick to compute, and collision-resistant.
+Line 117: Symmetric encryption uses a single shared key for both encryption and decryption.
+Line 118: Asymmetric encryption employs a public key for encryption and a private key for decryption.
+Line 119: RSA algorithm relies on the practical difficulty of factoring the product of two large prime numbers.
+Line 120: Hash functions map input data of arbitrary size to a fixed-size bit string.
+Line 121: Symmetric encryption uses a single shared key for both encryption and decryption.
+Line 122: Public Key Infrastructure (PKI) manages digital certificates to establish trust over networks.
+Line 123: The Advanced Encryption Standard (AES) is a symmetric block cipher widely used globally.
+Line 124: Asymmetric encryption employs a public key for encryption and a private key for decryption.
+Line 125: Asymmetric encryption employs a public key for encryption and a private key for decryption.
+Line 126: Elliptic Curve Cryptography (ECC) offers similar security to RSA but with significantly smaller key sizes.
+Line 127: Digital signatures provide authentication, non-repudiation, and data integrity.
+Line 128: RSA algorithm relies on the practical difficulty of factoring the product of two large prime numbers.
+Line 129: Elliptic Curve Cryptography (ECC) offers similar security to RSA but with significantly smaller key sizes.
+Line 130: Asymmetric encryption employs a public key for encryption and a private key for decryption.
+Line 131: Elliptic Curve Cryptography (ECC) offers similar security to RSA but with significantly smaller key sizes.
+Line 132: The Advanced Encryption Standard (AES) is a symmetric block cipher widely used globally.
+Line 133: A nonce is an arbitrary number used only once in a cryptographic communication to prevent replay attacks.
+Line 134: Digital signatures provide authentication, non-repudiation, and data integrity.
+Line 135: Elliptic Curve Cryptography (ECC) offers similar security to RSA but with significantly smaller key sizes.
+Line 136: Public Key Infrastructure (PKI) manages digital certificates to establish trust over networks.
+Line 137: Public Key Infrastructure (PKI) manages digital certificates to establish trust over networks.
+Line 138: Symmetric encryption uses a single shared key for both encryption and decryption.
+Line 139: Public Key Infrastructure (PKI) manages digital certificates to establish trust over networks.
+Line 140: Elliptic Curve Cryptography (ECC) offers similar security to RSA but with significantly smaller key sizes.
+Line 141: Asymmetric encryption employs a public key for encryption and a private key for decryption.
+Line 142: Digital signatures provide authentication, non-repudiation, and data integrity.
+Line 143: The Advanced Encryption Standard (AES) is a symmetric block cipher widely used globally.
+Line 144: Symmetric encryption uses a single shared key for both encryption and decryption.
+Line 145: A cryptographic hash must be deterministic, quick to compute, and collision-resistant.
+Line 146: A nonce is an arbitrary number used only once in a cryptographic communication to prevent replay attacks.
+Line 147: Digital signatures provide authentication, non-repudiation, and data integrity.
+Line 148: Asymmetric encryption employs a public key for encryption and a private key for decryption.
+Line 149: Public Key Infrastructure (PKI) manages digital certificates to establish trust over networks.
+Line 150: Elliptic Curve Cryptography (ECC) offers similar security to RSA but with significantly smaller key sizes.
