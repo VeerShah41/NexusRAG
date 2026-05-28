@@ -33,3 +33,9 @@ Thumbs.db
 # Logs
 *.log
 *.sqlite
+
+# Temp and Uploads
+uploads/
+cookies.txt
+*.zip
+test_*.py
