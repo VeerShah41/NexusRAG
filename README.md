@@ -1,106 +1,114 @@
-# NexusRAG
+# NexusRAG — Intelligent Document RAG System
 
-**Multi-Document Enterprise Search Assistant**
+NexusRAG is a lightweight, AI-powered document assistant designed for processing, indexing, and querying multi-format text documents. It allows users to upload local files or synchronize entire Google Drive directories, transforming static text into a highly intelligent, interactive knowledge base using Retrieval-Augmented Generation (RAG).
 
-NexusRAG is a robust Retrieval-Augmented Generation (RAG) system built to act as a powerful enterprise search assistant. It allows users to directly upload or sync multiple company documents (PDFs and Text files), process them into a vectorized knowledge base, and ask natural language questions to receive grounded, accurate answers.
+## 🖼️ Application Previews
 
-This project was built to fulfill **Option 2: Multi-Document Enterprise Search Assistant** of the Full Stack & Gen-AI Assignment.
+### 1. Workspace Overview & Data Ingestion
+![Workspace Overview](assets/dashboard.png)
+*A sleek, matte-black and creamy-ivory dashboard providing real-time telemetry on vector chunks, indexed documents, and the active LLM engine status. Users can ingest local PDFs or sync public Google Drive folders.*
 
----
-
-## 🎯 Key Features
-
-1. **Multi-Document Support**: Upload `.pdf` and `.txt` files directly via the browser or sync an entire public Google Drive folder.
-2. **Relevance Ranking**: When retrieving context for an answer, the system displays the exact chunks used, their source file, and a visual **relevance score** to ensure transparency.
-3. **Advanced RAG Pipeline**:
-   - **Text Extraction & Chunking**: Recursive character splitting ensures semantic boundaries are respected.
-   - **Embeddings**: Uses `all-MiniLM-L6-v2` for fast, accurate vector embeddings.
-   - **Vector Store**: Uses FAISS for lightning-fast similarity search.
-   - **LLM Engine**: Powered by Groq (Llama-3.3-70b) or Google Gemini for high-quality, grounded answer generation.
-4. **Modern UI**: A premium, responsive React frontend featuring glassmorphism design, real-time status updates, and interactive chat.
+### 2. Intelligent RAG Interface & Retrieval Audit
+![Ask AI Interface](assets/chat.png)
+*The dynamic query interface featuring grounded LLM responses. The right-side "Retrieval Audit" drawer provides full transparency into the semantic vector search, showing exact context chunks and relevance scoring for maximum traceability.*
 
 ---
 
-## 🏗️ Architecture Overview
+## 🏗️ Architecture & Tech Stack
 
-The system follows a classic RAG architecture decoupled into two main services:
+### Frontend
+- **Framework**: React 18 + Vite (Single Page Application)
+- **Styling**: Vanilla CSS with custom-built responsive components, dynamic light/dark mode CSS variables, and glassmorphism.
+- **Icons & UI Elements**: Lucide React.
+- **Session Management**: Custom `x-user-id` local storage header generation to natively bypass browser proxy cookie restrictions and seamlessly support multi-tenant local environments.
 
-### 1. Frontend (React + Vite)
-- **UI Components**: Built using React and Lucide icons.
-- **State Management**: React Hooks (`useState`, `useEffect`) handle tab switching, file uploads, and chat history.
-- **Styling**: Vanilla CSS with a focus on CSS variables for consistent theming and micro-animations for better UX.
-
-### 2. Backend (FastAPI)
-- **API Layer**: `api/routes.py` handles HTTP requests (uploads, sync, chat).
-- **Processing Layer**: `processing/extractor.py` and `chunker.py` convert raw files into manageable text chunks.
-- **Embedding & Storage**: `embedding/embedder.py` generates vectors which are stored and queried via `search/vector_store.py` (FAISS).
-- **LLM Layer**: `llm/answer.py` constructs grounded prompts and interfaces with the LLM provider.
-
----
-
-## 🧠 Design Decisions & Assumptions
-
-### Design Decisions
-- **Local FAISS over Vector Database**: For a lightweight, easily deployable assignment, local FAISS is used instead of a managed vector DB like Pinecone. This reduces external dependencies.
-- **Vite + React**: Chosen for rapid frontend development and excellent performance.
-- **Decoupled Frontend/Backend**: Although the FastAPI backend serves the compiled React app (`/dist`) for simplicity in a single container, the codebases are completely independent, allowing for separate scaling in the future.
-
-### Assumptions
-- **Public Folder Sync**: The Google Drive sync feature assumes the provided folder link is publicly accessible (anyone with the link can view). It uses `gdown` to bypass OAuth complexity for this specific assignment requirement.
-- **LLM API Keys**: The user must provide their own Groq or Gemini API keys to generate answers.
+### Backend (API & Engine)
+- **Server**: FastAPI + Uvicorn (Asynchronous REST API)
+- **Vector Database**: FAISS (Facebook AI Similarity Search) used for ultra-fast, local similarity matching.
+- **Embedding Model**: `sentence-transformers/all-MiniLM-L6-v2` (Local execution for speed and privacy).
+- **LLM Integration**: Groq API (LLaMA-3) & Google Gemini (1.5 Flash).
+- **Extraction & Processing**: `pdfplumber` (for highly accurate PDF parsing) and NLTK for structured chunking.
 
 ---
 
 ## 🚀 Setup Instructions
 
 ### Prerequisites
-- Python 3.10+
-- Node.js 18+ (for frontend development)
-- A Groq API Key (`GROQ_API_KEY`) or Google Gemini API Key (`GEMINI_API_KEY`)
+- Node.js (v18+)
+- Python (3.10+)
+- A Groq or Google Gemini API Key
 
 ### 1. Backend Setup
+Navigate into the root directory and set up the Python environment:
+```bash
+# Create and activate a virtual environment
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 
-1. Clone the repository and navigate to the root directory.
-2. Create a virtual environment and install dependencies:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   pip install -r requirements.txt
-   ```
-3. Copy the environment template and add your API keys:
-   ```bash
-   cp .env.example .env
-   # Edit .env and add your GROQ_API_KEY
-   ```
-4. Start the FastAPI server:
-   ```bash
-   uvicorn main:app --reload
-   ```
+# Install dependencies
+pip install -r requirements.txt
+
+# Create a .env file and add your API keys
+echo "GROQ_API_KEY=your_groq_key_here" > .env
+echo "GEMINI_API_KEY=your_gemini_key_here" >> .env
+echo "LLM_PROVIDER=groq" >> .env
+```
+Run the FastAPI server:
+```bash
+uvicorn main:app --reload
+# The backend will start on http://127.0.0.1:8000
+```
 
 ### 2. Frontend Setup
-
-1. Open a new terminal and navigate to the `frontend` directory:
-   ```bash
-   cd frontend
-   ```
-2. Install Node dependencies:
-   ```bash
-   npm install
-   ```
-3. Start the Vite development server:
-   ```bash
-   npm run dev
-   ```
-
-*Note: For production, run `npm run build` inside the `frontend` directory. The FastAPI backend is configured to serve the `frontend/dist` folder automatically on `http://localhost:8000/`.*
+Open a second terminal, navigate to the `frontend` folder, and run the React app:
+```bash
+cd frontend
+npm install
+npm run dev
+# The frontend will start on http://localhost:5174
+```
 
 ---
 
-## 📖 API Endpoint Descriptions
+## 🧠 Design Decisions & Features
 
-- `POST /upload`: Accepts `multipart/form-data` with a file. Extracts text, chunks it, embeds it, and stores it in FAISS.
-- `POST /sync-drive`: Accepts a JSON body with a `folder_id`. Downloads public files using `gdown`, processes, and indexes them.
-- `POST /ask`: Accepts a JSON body with a `query`. Searches FAISS for the top-k chunks and generates an LLM answer. Returns the answer along with source chunks and their relevance scores.
-- `GET /recommend-questions`: Returns 3 suggested questions based on random chunks from the current index.
-- `GET /status`: Returns the current stats of the FAISS index (number of chunks, unique documents).
-- `POST /clear-data`: Wipes the FAISS index and local storage for a fresh start.
+1. **"Bring Your Own Key" (BYOK) Architecture**  
+   Rather than locking users into a single hardcoded LLM, a dedicated **Models** configuration page was built. Users can dynamically inject their personal Groq or Gemini API keys in the UI, overriding server defaults instantly without restarts.
+   
+2. **True Multi-Tenant Architecture (Without Cookies)**  
+   To fulfill the "multiple users" requirement smoothly on local `localhost:5174` dev servers (where cross-port cookies frequently fail), the system generates a persistent UUID in the frontend's `localStorage`. This UUID is explicitly sent as an `x-user-id` header in a centralized `apiFetch` wrapper. The backend automatically provisions isolated FAISS directories (`/storage/<user_id>`) for concurrent users.
+   
+3. **Transparent "Retrieval Audit" Drawer**  
+   AI hallucinations are a major problem in RAG. To solve this, the chat interface features a slide-out drawer that exposes exactly which chunks the FAISS engine retrieved, along with their mathematical relevance scores (`L2` / `Cosine` converted to probabilities).
+   
+4. **Targeted Document Deletion**  
+   The local FAISS index (`IndexFlatIP`) technically does not support arbitrary ID removal easily. To bypass this, we implemented dynamic metadata re-mapping. Deleting a document instantly identifies its chunk IDs, deletes them from FAISS, compacts the remaining index, and rewrites the metadata dictionary securely without memory leaks.
+
+---
+
+## ⚠️ Assumptions Made
+- **File Storage**: Uploaded files are temporarily stored locally in the `/uploads` directory on the server file system rather than an external cloud bucket like S3 to simplify setup.
+- **Native PDF Text**: The extraction engine uses `pdfplumber` for robust text extraction. It assumes uploaded PDFs have native text layers. Complex OCR scanning of purely image-based PDFs is out of scope for this lightweight implementation.
+- **Size Limitation**: A hard limit of 50MB is enforced on the frontend and backend to protect system memory during the text extraction and embedding phases.
+
+---
+
+## 📖 Core API Documentation
+
+- `POST /upload`  
+  Accepts a `multipart/form-data` file. Extracts text, generates embeddings, and injects chunks into the user's specific FAISS index.
+  
+- `POST /sync-drive`  
+  Accepts a JSON body `{ "folder_id": "string" }`. Connects to a public Google Drive link, extracts `.pdf` and `.txt` files sequentially, and indexes them into the active corpus.
+  
+- `GET /documents`  
+  Returns an aggregated list of all parsed and indexed documents for the active user, including total chunks mapped per document.
+  
+- `DELETE /documents/{file_name}`  
+  Physically purges a document from the FAISS vector space, removes it from the JSON metadata, and deletes the physical file from the `/uploads` directory.
+  
+- `POST /ask`  
+  Accepts `{ "query": "string" }`. Embeds the query, retrieves the top `K=5` chunks from FAISS, constructs a grounded LLM prompt, and returns the response alongside the specific source references.
+
+- `GET /recommend-questions`  
+  Dynamically grabs 5 random context chunks from the user's FAISS index and asks the LLM to generate 3 relevant, highly specific follow-up questions tailored to their unique corpus.
