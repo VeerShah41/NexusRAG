@@ -234,10 +234,10 @@ function App() {
             <button className="theme-toggle" onClick={toggleTheme} title={`Switch to ${isDark ? 'light' : 'dark'} mode`}>
               <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                 {isDark
-                  ? <Sun  size={15} style={{ color: 'var(--accent-2)' }} />
-                  : <Moon size={15} style={{ color: 'var(--accent)'   }} />
+                  ? <Moon size={15} style={{ color: 'var(--accent)' }} />
+                  : <Sun  size={15} style={{ color: 'var(--accent-2)' }} />
                 }
-                {isDark ? 'Light Mode' : 'Dark Mode'}
+                {isDark ? 'Dark Mode' : 'Light Mode'}
               </span>
               <div className={`toggle-track ${isDark ? '' : 'on'}`}>
                 <div className="toggle-thumb" />
@@ -280,7 +280,7 @@ function App() {
         <div className="content-inner">
           {activePage === 'dashboard' && <Dashboard  status={systemStatus} isIndexed={isIndexed} onNavigate={navigateTo} />}
           {activePage === 'upload'    && <FileUpload onUploadSuccess={triggerRefresh} />}
-          {activePage === 'documents' && <Library    status={systemStatus} />}
+          {activePage === 'documents' && <Library    status={systemStatus} onRefresh={triggerRefresh} />}
           {activePage === 'models'    && <Models     />}
           {activePage === 'ask'       && <Chat       isReady={isIndexed} onDebugUpdate={setLastDebug} toggleDrawer={toggleDrawer} />}
           {activePage === 'settings'  && <SettingsPage status={systemStatus} onRefresh={triggerRefresh} />}

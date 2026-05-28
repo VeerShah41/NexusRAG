@@ -11,6 +11,7 @@ export default defineConfig({
       '/status': 'http://127.0.0.1:8000',
       '/documents': 'http://127.0.0.1:8000',
       '/sync-drive': 'http://127.0.0.1:8000',
+      '/sync-demo': 'http://127.0.0.1:8000',
       '/recommend-questions': 'http://127.0.0.1:8000',
     }
   }
